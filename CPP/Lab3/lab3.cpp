@@ -1,10 +1,19 @@
 /*
-Write a program that uses Function pointer to a function that takes:
-    - 2D array of integers
-    - its size
-    - an array of row sizes
-    - a callback function
-and returns an array of integers
+ * ----------------------------------------------------------------------------------
+ * Filename		:	Lab3.cpp
+ *
+ * Author		:	Ahmed Essam El-Mogy
+ * Created on	:	Jul 4th, 2024
+ * ----------------------------------------------------------------------------------
+ */
+
+/* Lab Description:
+    Write a program that uses Function pointer to a function that takes:
+        - 2D array of integers
+        - its size
+        - an array of row sizes
+        - a callback function
+    and returns an array of integers
 */
 
 #include <iostream>

@@ -77,8 +77,8 @@ Command `type` is used to find out whether a command is a Bash internal or an ex
 
 ![Q10](Screenshots/q10.png)
 
-`cat` command is hashed inside /user/bin .
-`calendar` is a Bash internal command.
+`cat` command is external hashed inside /user/bin .
+`calendar` is a Bash external command.
 
 ## 11. Using man command, find the command to read file. (**Note**: man take option)
 
