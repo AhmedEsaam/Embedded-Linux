@@ -14,7 +14,9 @@ This makefile example automates the building process (compilation and linking) o
 make clean
 ```
 
-### 3. Compile the application by running the makefile using `make`
+### 3. Compile the application by running the makefile using `make` in terminal
+
+* **Note:** The `./build/` and `./bin/` directories are created automatically if they do not exist.
 
 ```shell
 make
