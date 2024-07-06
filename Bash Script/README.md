@@ -2,6 +2,18 @@
 
 To run the Bash script:
 
+## Shebang
+
+Start your code script with
+**Shebang**:`#!/bin/bash` Tells the terminal that this is script is written in `bash`, so it must run using bash.
+
+## Bash script environment variables
+
+`$@`
+`$#`
+`$0`
+...
+
 ## To Run the script
 
 ### 1. `./file.sh`
@@ -9,12 +21,22 @@ To run the Bash script:
 ```bash
 ./file.sh               # user must have permission to execute
 chmod +x ./file.sh      # give permission to execute
-chmod -x ./file.sh      # to undo permission
+chmod -x ./file.sh      # to undo permissionrunrunningning
 ```
+
+* if you did not use the **shebang**, it will use the current running shell.
 
 * Other 3 ways to run the script do not require executable permission
 
-### 2. `source ./file.sh`
+### 2. `bash ./file.sh`
+
+```bash
+bash ./file.show      
+```
+
+* if you did not use the **shebang**, it will use `bash`.
+
+### 3. `source ./file.sh` (not supported in `sh`, but supported in `bash`)
 
 To run the script within the same bash process (no child craeted):
 
@@ -24,6 +46,12 @@ source ./file.show
 ```
 
 * This will allow you to use the variables created in this script
+
+### 4. `. ./file.sh` (another way to run as source)
+
+```bash
+. ./file.sh
+```
 
 ## Variables
 
@@ -71,6 +99,26 @@ echo $Password
 ```Bash
 output=$(date)
 echo $output    # => Friday 15 December 2023 01:06:49 PM IST 
+```
+
+### Operations on variables
+
+To treat var as integer:
+
+```bash
+var=5
+
+# Using ((c-style syntax))
+((var++))
+var5=$((var++))
+
+# Using expr
+var2= expr $var + 1
+var3= expr 2 + 2
+
+# Using decalre
+declare -i var4=5
+var4=var4+1     # no spaces
 ```
 
 ---
@@ -135,6 +183,8 @@ Or:
 echo $?
 ```
 
+---
+
 ### Logical Operators
 
 * and: `&&` , `-a`
@@ -157,7 +207,7 @@ test 1 -eq 1 -a 10 -eq 8
 
 ## If Conditions
 
-Syntax:
+### If then fi
 
 ```bash
 if [condition]
@@ -305,7 +355,7 @@ There are two types of arrays:
 
 ### 1. Index Array
 
-#### Implicit Declaration
+#### Declare Using Implicit Declaration
 
 ```bash
 var=5
@@ -348,7 +398,7 @@ done
 
 while `"${fruits[*]}"` considers the array as one unit.
 
-#### Example1
+##### Example1
 
 ```bash
 cities=("New York" "Los Angeles" "Cairo")
@@ -368,7 +418,7 @@ Angeles
 Cairo
 ```
 
-#### Example2
+##### Example2
 
 ```bash
 cities=("New York" "Los Angeles" "Cairo")
@@ -424,7 +474,7 @@ Output
 
 ### 2. Associated Array
 
-#### Explicit Declaration
+#### Declare Using Explicit Declaration
 
 ```bash
 declare -i var=5
@@ -478,4 +528,36 @@ done
 fruits=("apple" "banana" "melon")
 unset fruits[1]         # removes "banana"
 echo ${fruits[1]}       # prints nothing => as it will not shift elements
+```
+
+---
+
+## Case
+
+```bash
+read -p "are you sure? " var
+
+case $var in
+yes|y|Yes|YES)
+    echo $var
+    ;;              # break
+no|n|No|NO)
+    echo $var
+    ;;
+*)
+    echo "invalid"
+    ;;
+esac
+```
+
+---
+
+## Select
+
+```bash
+select var in "date" "ls" "exit"
+do
+    $var        # runs selected command
+    # break
+done
 ```

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Script Requirements:
 #   - Declare an indexed array containing at least 5 elements (e.g., names of cities).
 #   - Print the entire array
