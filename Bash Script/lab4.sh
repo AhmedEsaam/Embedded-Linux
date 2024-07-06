@@ -30,6 +30,7 @@ do
     *)
         echo "Invalid input"
         ;;
-    esac    
+    esac
+      
     break
 done
