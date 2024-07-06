@@ -46,7 +46,7 @@ name3=${name}1
 echo name3      # => ahmed3
 ```
 
-### The difference between "" and ''
+### The difference between `""` and `''`
 
 ```bash
 var=iti
@@ -290,7 +290,7 @@ until [ 1 -eq 1 ]; do
 done
 ```
 
----
+**Note**: to decalre an integer explicitly:
 
 ```bash
 declare -i c=2
@@ -302,9 +302,9 @@ declare -i c=2
 
 There are two types of arrays:
 
-### Index Array
+### 1. Index Array
 
-#### 1. Implicit Declaration
+#### Implicit Declaration
 
 ```bash
 fruits=("apple" "banana" "cherry")
@@ -323,22 +323,57 @@ echo ${fruits[7]}   # => prints nothing
 
 ```bash
 fruits=("apple" "banana" "cherry")
-# @: stands for 'anything'
-echo ${fruits[@]}   # apple banana cherry
+
+echo ${fruits[@]}   # apple banana cherry   # @: stands for 'anything'
 echo ${fruits[*]}   # apple banana cherry
 ```
 
-* The behaviour of `[@]` differs from `[*]` when putting qutation sighns `""`  
+The behaviour of `[@]` differs from `[*]` when putting qutation marks `""`  
 
 ```bash
 echo "${fruits[@]}" # "apple" "banana" "cherry"
 echo "${fruits[*]}" # "apple banana cherry"
 
-for var in "${fruits[*]}"; do
-
+# [@] is better with for loops as it will consider every element
+for var in "${fruits[@]}"; do
+    echo $var
 done
 ```
 
 `"${fruits[@]}"` considers every element,
+
 while `"${fruits[*]}"` considers the array as one unit.
 
+### Print Array Length
+
+```bash
+echo ${#fruits[@]}
+echo ${#fruits[*]}
+```
+
+### Print Array Slice
+
+`{fruits[@]:start index:number of elements}`
+
+```bash
+echo ${fruits[@]:1:2}
+```
+
+### Print Array Indexes
+
+```bash
+fruits=("apple" "banana" "cherry")
+
+for index in ${!fruits[@]}
+do
+    echo "$index, element ${fruits[$index]}"
+done
+```
+
+Output
+
+```bash:
+0, element apple
+1, element banana
+2, element cherry
+```
