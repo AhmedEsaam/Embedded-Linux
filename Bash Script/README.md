@@ -561,3 +561,131 @@ do
     # break
 done
 ```
+
+---
+
+## Strings
+
+```bash
+string="Mostafa Tera"
+echo ${#string}     # print the number of characters inside the string
+```
+
+### Print Substring ${#string:start at index:number of characters}
+
+```bash
+string="Mostafa Tera"
+substring="${string:2:4}"
+echo ${substring}
+```
+
+### Examples
+
+```bash
+string1="Ahmed"
+string2="Mohammed"
+if [ $string1 = $string2 ]; then
+    echo ""${string1}" equal "${string2}""
+else
+    echo ""${string1}" not equal "${string2}""
+fi
+```
+
+To concatinate two strings:
+
+```bash
+string2=${string1}+Mustafa
+```
+
+---
+
+## Functions
+
+There are 3 ways to write functions:
+
+### Syantax 1
+
+```bash
+func()
+{
+
+}
+```
+
+### Syantax 2
+
+```bash
+function func
+{
+
+}
+func    # => call
+```
+
+### Syantax 3
+
+```bash
+function func()
+{
+
+}
+func    # => call
+```
+
+### Example
+
+```bash
+displayArgs()
+{
+    # arguments ($0: is always the 'script' name, $1: 'function' arg1, ...)
+    echo $0 $1 $2                   
+}
+
+# To pass script args to a function inside the script:
+displayArgs $1 "Mostafa" "Tera"     # here, $1 is a script arg. not a function arg.
+
+```
+
+```bash
+add(){
+    sum=$(($1 + $2))
+    return sum
+}
+add 5 5
+result=$?
+echo $result
+```
+
+```bash
+add(){
+    sum=$(($1 + $2))
+    echo sum
+}
+result=$(add 5 5)
+result=$?
+echo $result
+```
+
+### Local and global vars
+
+```bash
+var=Mohamed
+
+func(){
+    var=Ahmed
+}
+func
+echo $var       # it will print "Ahmed" as the global var is overwritten inside the function
+```
+
+To print "Mohammed", make the var 'local'
+
+```bash
+var=Mohamed
+
+func(){
+    local var=Ahmed
+}
+func
+echo $var       # it will print "Mohamed"
+```
