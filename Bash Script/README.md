@@ -78,6 +78,7 @@ echo $output    # => Friday 15 December 2023 01:06:49 PM IST
 ## `test condiion`
 
 ### Conditions
+
 There are 3 types of conditions:
 
 #### 1. integers condition
@@ -117,7 +118,7 @@ There are 3 types of conditions:
 -f /path/file
 ```
 
-#### `test` Syntax:
+#### `test` Syntax
 
 * `0` is equib=valent to true in bash script
 * `$?` stores the return status of the last command
@@ -307,7 +308,12 @@ There are two types of arrays:
 #### Implicit Declaration
 
 ```bash
-fruits=("apple" "banana" "cherry")
+var=5
+((var++))
+```
+
+```bash
+fruits=("apple" "banana" "cherry")      # the bash recognises that it's an index array
 echo ${fruits[0]}   # you can't use $fruits[0]
 ```
 
@@ -317,9 +323,7 @@ fruits[10]="melon"  # uninitialized elements will be empty
 echo ${fruits[7]}   # => prints nothing
 ```
 
-### 2. Associated Array
-
-### Print Array Elements
+#### Print Array Elements
 
 ```bash
 fruits=("apple" "banana" "cherry")
@@ -344,14 +348,52 @@ done
 
 while `"${fruits[*]}"` considers the array as one unit.
 
-### Print Array Length
+#### Example1
+
+```bash
+cities=("New York" "Los Angeles" "Cairo")
+for city in ${cities[@]}    # ${cities[@]} this gives: new York Los Angeles Cairo  
+do
+    echo $city
+done
+```
+
+Output:
+
+```bash
+New
+York
+Los
+Angeles
+Cairo
+```
+
+#### Example2
+
+```bash
+cities=("New York" "Los Angeles" "Cairo")
+for city in "${cities[@]}"      # "${cities[@]}" this gives: "new" "York" "Los" "Angeles" "Cairo"
+do
+    echo $city
+done
+```
+
+Output:
+
+```bash
+New York
+Los Angeles
+Cairo
+```
+
+#### Print Array Length
 
 ```bash
 echo ${#fruits[@]}
 echo ${#fruits[*]}
 ```
 
-### Print Array Slice
+#### Print Array Slice
 
 `{fruits[@]:start index:number of elements}`
 
@@ -359,7 +401,7 @@ echo ${#fruits[*]}
 echo ${fruits[@]:1:2}
 ```
 
-### Print Array Indexes
+#### Print Array Indexes
 
 ```bash
 fruits=("apple" "banana" "cherry")
@@ -376,4 +418,64 @@ Output
 0, element apple
 1, element banana
 2, element cherry
+```
+
+---
+
+### 2. Associated Array
+
+#### Explicit Declaration
+
+```bash
+declare -i var=5
+$var=$var+5
+```
+
+* You cannot define associated array other than by explicit declaration
+
+```bash
+#declare array
+declare -A fruits=([apple]="red" [banana]="yellow")       #declare associated array
+
+declare -A fruits2
+fuits2[apple]="red"
+fuits2[banana]="yellow"
+```
+
+#### Print Associated Array Elements
+
+```bash
+declare -A fruits=([apple]="red" [banana]="yellow")
+echo ${fruits[apple]}   # red
+echo ${fruits[@]}       # red yellow (not necessarily in the same order)
+```
+
+#### Print Array Keys
+
+```bash
+declare -A fruits=([apple]="red" [banana]="yellow")
+
+for key in ${!fruits[@]}
+do
+    echo key
+done
+```
+
+```bash
+declare -A fruits=([apple]="red" [banana]="yellow")
+
+for key in ${!fruits[@]}
+do
+    echo "key is $key, value is ${fruits[$key]}"
+done
+```
+
+---
+
+### To remove array
+
+```bash
+fruits=("apple" "banana" "melon")
+unset fruits[1]         # removes "banana"
+echo ${fruits[1]}       # prints nothing => as it will not shift elements
 ```
