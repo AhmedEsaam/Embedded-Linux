@@ -3,8 +3,6 @@
 #include <string>
 #include <algorithm>
 
-using namespace std;
-
 namespace MathFunctions
 {
     void print(double num)

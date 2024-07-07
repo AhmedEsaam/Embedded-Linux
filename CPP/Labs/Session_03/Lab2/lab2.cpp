@@ -2,15 +2,21 @@
 
 namespace DynamicAlloc
 {
-    int ** create2DArray(int size)
+    int ** create2DArray(int rows, int cols)
     {
-        int ** arr = new int*[size];
+        int ** arr = new int*[rows];
+
+        for (int i = 0; i < rows; ++i)
+        {
+            arr[i] = new int[cols];
+        }
+
         return arr;
     }
 
-    void delete2DArray(int** arr, int size)
+    void delete2DArray(int** arr, int rows)
     {
-        for (int i = 0; i < size; ++i)
+        for (int i = 0; i < rows; ++i)
         {
             delete [] arr[i];
         }
@@ -24,9 +30,9 @@ namespace DynamicAlloc
 
 int main(void)
 {
-    const int SIZE = 5;
-    int **arr = DynamicAlloc::create2DArray(SIZE);
-    DynamicAlloc::delete2DArray(arr, SIZE);
+    const int ROWS = 3, COLS = 5;
+    int **arr = DynamicAlloc::create2DArray(ROWS, COLS);
+    DynamicAlloc::delete2DArray(arr, ROWS);
 
     return 0;
 }

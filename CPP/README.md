@@ -139,24 +139,46 @@ for(int val : arr)
 * `new` returns **exception** if failed to allocate memory.
 * `delete` **calls the destructor**, while `free` **doesn't call the destructor**
 
+### Allocating int
+
 ```cpp
-// allocating int
 int * p = new int {5};
 delete ptr;
+```
 
-// allocating array of ints
+### Allocating array of ints
+
+```cpp
 int * arr = new int[5]{1, 2, 3, 4, 5};
 delete[] arr;
-
-// allocating 2-D array
-int ** arr_2d = new int*[5]     // the arr_2d pointer resides in stack but points to pointers in heap
-                                // every one of them points to memory in heap
-
-// Deallocating the 2-D array.
-// First, use for loop to delete the pointers in the arr_2d array
-// Second, deallocate the 2-D array.
-delete[] arr_2d;
 ```
+
+### Allocating 2-D array
+
+```cpp
+// the arr_2d pointer resides in stack but points to pointers in heap. Every one of them points to memory in heap
+int ** arr_2d = new int*[rows]
+for (int i = 0; i < rows; ++i)
+{
+    arr_2d[i] = new int[cols];
+}
+```
+
+### Deallocating the 2-D array
+
+```cpp
+// First, use for loop to delete the pointers in the arr_2d array
+for (int i = 0; i < rows; ++i)
+{
+    delete [] arr_2d[i];
+}
+// Second, deallocate the 2-D array.
+delete [] arr_2d;
+// Make the 2-D array pointer equal Null
+arr_2d = nullptr;
+```
+
+### Notes
 
 * When creating an object with `new`, it calls the constructor.
 * if you used `malloc` instead, it'll not call the constructor. It only allocates memory.
@@ -165,7 +187,7 @@ delete[] arr_2d;
 MyClass * Hussam = new MyClass();   // calls the constructor
 ```
 
-* To delete allocated memory properly
+### To delete allocated memory properly
 
 ```cpp
 int * ptr = new int(5);
