@@ -42,15 +42,27 @@ namespace ArrayFunctions
 
 int main()
 {
+    /* Decalaring Variables */
     double doubleVar = {25.0};
+
     std::string str = {"Hello"};
+    
     std::string type1 = {"lower"};
+
     std::string type2 = {"upper"};
+    
     int arr[] = {1, 2, 3, 4, 5};
 
+
+    /* Calling 'print' Functions */
     MathFunctions::print(doubleVar);
+    
     StringFunctions::print(str, type1);
+    
     StringFunctions::print(str, type2);
+    
     ArrayFunctions::print(arr, 5);
+    
+    
     return 0;
 }
