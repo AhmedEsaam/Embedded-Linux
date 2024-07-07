@@ -1,59 +1,60 @@
 #include <iostream>
 
-using namespace std;
+// using namespace std;
 
 namespace ArrayPairs
 {
     /* Function to create pair array */
-    pair<int, int> * createArray(int size)
+    std::pair<int, int> * createArray(int size)
     {
-        std::pair<int, int> * pairArr = new pair<int, int> [size]; 
+        std::pair<int, int> * pairArr = new std::pair<int, int> [size]; 
         return pairArr;
     }
 
     /* Function to delete pair array */
-    void deleteArray(pair<int, int> * pairArr)
+    void deleteArray(std::pair<int, int> * pairArr)
     {
         delete [] pairArr;
     }
 
     /* Function to set a pair array item at specific index */
-    void setPair(pair<int, int> * pairArr, int index, int pairFirst, int pairSecond)
+    void setPair(std::pair<int, int> * pairArr, int index, int pairFirst, int pairSecond)
     {
         pairArr[index].first = pairFirst;
         pairArr[index].second = pairSecond;
     }
 
     /* Function to get a pair array item at specific index */
-    pair<int, int> getPair(pair<int, int> * pairArr, int index)
+    std::pair<int, int> getPair(std::pair<int, int> * pairArr, int index)
     {
         return  pairArr[index];
     }
 
     /* Functin to print a pair array */    
-    void printPairArray(pair<int, int> * pairArr, int size)
+    void printPairArray(std::pair<int, int> * pairArr, int size)
     {
         for (int i = 0; i < size; ++i)
         {
-            cout << "Pair Array[" << i << "] .first = " << pairArr[i].first
-                << " .second = " << pairArr[i].second << endl;
+            std::cout << "Pair Array[" << i << "] .first = " << pairArr[i].first
+                << " .second = " << pairArr[i].second << std::endl;
         }
     }
 
     /* Function to print a Pair */
-    void printPair(pair<int, int> pair)
+    void printPair(std::pair<int, int> pair)
     {
-        cout << "Pair .first = " << pair.first
-            << " .second = " << pair.second << endl;
+        std::cout << "Pair .first = " << pair.first
+            << " .second = " << pair.second << std::endl;
     }
 
 }
+
 
 int main(void)
 {
     /* Creating the Pair Array */
     const int SIZE = 3; 
-    pair<int, int> * pairArr = ArrayPairs::createArray(SIZE);
+    std::pair<int, int> * pairArr = ArrayPairs::createArray(SIZE);
 
     /* Setting the pair array elements */
     ArrayPairs::setPair(pairArr, 0, 1, 2);
