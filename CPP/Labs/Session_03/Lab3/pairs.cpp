@@ -27,7 +27,7 @@ namespace ArrayPairs
     /* Function to get a pair array item at specific index */
     pair<int, int> getPair(pair<int, int> * pairArr, int index)
     {
-        return  *(pairArr + index);
+        return  pairArr[index];
     }
 
     /* Functin to print a pair array */    
