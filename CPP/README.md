@@ -249,7 +249,44 @@ static_cast<int> var;
 
 ---
 
-## 
+## Type Inference
+
+Allows the compiler to automatically infer the type of the object
+
+### Using `auto` keyword
+
+* Used with complex data types, in `lambda function`, and `for ranged`
+
+```cpp
+auto x = 20.5;      // compiler will define x as double 
+```
+
+* Checks the type of the object. Used with `templates`.
+
+```cpp
+const string message { "Test" };
+
+const string& foo() { return message;}
+
+const auto& f2 { foo() };
+
+for(auto v : {1, 2, 3, 4, 5})
+{
+    cout << v;
+}
+```
+
+### Using `decltype()`
+
+```cpp
+#include <typeinfo>
+
+int x {123};
+
+decltype(x) y {456};
+
+cout << typeid(y).name();   // prints 'i' : stands for integer
+```
 
 ---
 
@@ -260,3 +297,31 @@ static_cast<int> var;
 * C++ Insights (**site**)         -> reduce code to simplified code
 
 * Compiler Explorer (**site**)    -> reduce code to assemply
+
+---
+
+## Pair (std::pair)
+
+is a Template Container with two elemnts (can take two different data types).
+
+```cpp
+std::pair x {1, 2.2};
+cout << x.first;
+cout << x.second;
+
+std::pair<int, double> y {5, 2.2};
+cout << y.first;
+cout << y.second;
+
+std::make_pair<int, double> y {8, 2.2};
+```
+
+---
+
+## Structuredd Binding (with `auto`)
+
+```cpp
+int values[] {10, 20, 30};
+
+auto [x, y, z] { values };
+```
