@@ -200,6 +200,37 @@ delete arr_CStrings;
 
 ---
 
+## Static casting
+
+* Better as it does type checking
+
+```cpp
+float var;
+static_cast<int> var;
+```
+
+---
+
+## Linkage and Scope
+
+### No Linkage
+
+* Like **local** variables.
+
+### Internal Linkage
+
+* Private definitions (Like **static variables**, namespaces, etc.)
+
+### External Linkage
+
+* Any definitions visible withing the whole application (Like **Global** variables.)
+
+---
+
+## 
+
+---
+
 ## References
 
 * Professional C++, 6th Edition by Marc Gregoire (**Book**)
