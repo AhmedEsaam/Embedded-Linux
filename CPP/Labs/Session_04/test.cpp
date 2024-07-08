@@ -1,39 +1,36 @@
 #include <iostream>
-#include <array>
 
-using namespace std;
-
-int main(void)
+void print(void)
 {
+    std::cout << "print(void)" << std::endl;
+}
 
-    std::array<int, 5> arr{1, 2, 3, 4, 5};
+void print(int x)
+{
+    std::cout << "print(" << x << ")" << std::endl;
+}
 
-    int size = arr.size(); // 5
-    cout << size << endl;
+template <typename T1, typename T2>
+void setPair(T1 first, T2 second)
+{
+}
 
-    int item = arr.at(3);
-    cout << item << endl;
+template <typename T1, typename T2>
+void print(std::string, T2) = delete;
 
-    for (auto val : arr)
-    {
-        cout << val << endl;
-    }
+template <typename T1, typename T2>
+void print(T1 a, T2 b)
+{
+    std::cout << a << b << std::endl;
+};
 
-    // Check if an element exists in the array
+int main()
+{
+    print();
+    print(5);
 
-    std::string str{"hossam"};
-
-    str = "Hi";
-
-    // string size
-    cout << str.length() << endl;
-    cout << str.size() << endl;
-
-    // append
-    str.append(" Mustafa");
-    str += "!";
-
-    cout << str << endl;
+    print<int, int>(5, 6);
+    print<std::string, int>("a", 6);
 
     return 0;
 }

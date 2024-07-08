@@ -2,7 +2,10 @@
 
 if [ -f /home/ahmed-essam/.bashrc ]
 then
-    echo "true"
+    echo "export HELLO=${HOSTNAME}" >> /home/ahmed-essam/.bashrc
+    echo "LOCAL=$(whoami)" >> /home/ahmed-essam/.bashrc
+
+    gnome-terminal
 else
-    echo "false"
+    echo ".bashrc is not found"
 fi

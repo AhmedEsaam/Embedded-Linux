@@ -132,3 +132,157 @@ cout << str.size() << endl;
 str.append(" Mutafa");
 str += "!";
 ```
+
+---
+
+## Function Overloading
+
+### Function Signature
+
+1. Function Name
+2. Number of Arguments
+3. Type of parameters
+4. const or volatile
+5. Reference or pointer
+
+Note: **The return type** is not considered as one of the signature differences.
+
+```cpp
+void print(void)
+{
+    std::cout << "print(void)" << std::endl;
+}
+
+void print(int x)
+{
+    std::cout << "print(" << x << ")" << std::endl;
+}
+
+int main()
+{
+    print();
+    print(5);
+
+    return 0;
+}
+```
+
+* **Note:** if the argument types does not match the call, the compiler may do an implicit cast for passed arguments to fit the types
+
+```cpp
+void print(int x, int y)
+{
+    ...
+}
+
+void print(double x, int y)
+{
+    ...
+}
+
+int main()
+{
+    print('a', 5);      // will work. As 'a' will be casted to int
+
+    print(2.225f, 5);   // will work. As 2.225f will be casted to double
+    
+    return 0;
+}
+```
+
+---
+
+## Templates
+
+Templates is a way for generic programming.
+
+```cpp
+template <typename T>
+void print(T var)
+{
+
+}
+```
+
+* **Note:** If you want to pass two different data types, you need to provide two typenames (as the **compiler will resolve a typename to only one data type**)
+
+```cpp
+template <typename T>
+T max(T a, T b)
+{
+    return (a > b)? a : b;
+}
+
+```
+
+```cpp
+template <typename T1, typename T2>
+void setPair(T1 first, T2 second)
+{
+
+}
+
+int main()
+{
+    std::cout << setPair<int, double>(6, 5.36) << endl;
+    std::cout << setPair<int, double>('a', 5.36f) << endl;  // will make implicit casting to match types to the template types    
+
+    return 0;
+}
+```
+
+* To make an exception of a certain data type to make the template not accepts it:
+
+```cpp
+void setPair(std::string, std::string) = delete;
+
+// to delete the function where only the first arg is string and the second is any type
+template <typename T1, typename T2>
+void print(std::string, T2) = delete;
+
+template <typename T1, typename T2>
+void print(T1 a, T2 b)
+{
+    std::cout << a << b << std::endl;
+};
+
+int main()
+{
+    print<int, int>(5, 6);
+    print<std::string, int>("a", 6);    // Compiler Error
+
+    return 0;
+}
+```
+
+* You can do that in a class to prohibit the compiler from creating the default constructor:
+
+```cpp
+class myClass
+{
+    myClass() = delete;
+
+    myClass(int var1, int var2)
+    {
+
+    }
+}
+```
+
+* To restrict the template to specific data types
+
+```cpp
+template<std::same_as<int> T>       // c++20
+T max(T a, T b)
+{
+    return (a > b)? a : b;
+}
+```
+
+---
+
+## Name Mangling
+
+Is the process in which the compiler change the name of the functions with differenet signature or a template function to make different implementation.
+
+* You can see these different names in the debug symbols.
