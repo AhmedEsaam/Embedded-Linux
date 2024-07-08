@@ -290,16 +290,6 @@ cout << typeid(y).name();   // prints 'i' : stands for integer
 
 ---
 
-## References
-
-* Professional C++, 6th Edition by Marc Gregoire (**Book**)
-
-* C++ Insights (**site**)         -> reduce code to simplified code
-
-* Compiler Explorer (**site**)    -> reduce code to assemply
-
----
-
 ## Pair (std::pair)
 
 Is a type of Data Structure Template with two elemnts - first and second (can be of two different data types).
