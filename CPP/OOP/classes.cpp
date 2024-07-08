@@ -34,7 +34,6 @@ int main(void)
     int y = 5;
     MyClass Obj2(x, y);
 
-    
 
     return 0;
 }
