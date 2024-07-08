@@ -1,4 +1,4 @@
-# Session Notes
+# C++ - Session 02 Notes
 
 ```cpp
 
