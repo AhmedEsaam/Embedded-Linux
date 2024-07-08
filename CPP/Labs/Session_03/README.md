@@ -313,7 +313,10 @@ std::pair<int, double> y {5, 2.2};
 cout << y.first;
 cout << y.second;
 
-std::make_pair<int, double> p {8, 2.2};
+std::pair y = std::make_pair<int, double>(1, 2.2);
+
+std::pair<std::array<int, 2>, double> p{{1, 2}, 2.2};
+
 ```
 
 ---
