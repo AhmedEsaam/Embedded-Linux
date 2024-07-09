@@ -283,9 +283,24 @@ for(auto v : {1, 2, 3, 4, 5})
 
 int x {123};
 
-decltype(x) y {456};
+decltype(x) y {456};        // y is declared with the type of x
 
 cout << typeid(y).name();   // prints 'i' : stands for integer
+
+
+// type of pointer
+double * ptr = &y;
+typeid(ptr).name();         // pointer to int (pi)
+// to get value
+typeid(*ptr).name();        // 'i'
+
+
+// 2-D pointer
+void **ptr = new void*[5];
+//to get data
+*(int*)ptr[1];
+// or (more safe)
+*static_cast<int*>(ptr[1]);
 ```
 
 ---

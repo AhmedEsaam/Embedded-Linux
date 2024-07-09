@@ -28,7 +28,6 @@ struct Employee
 Employee Mohamed{'h','s', 4};
 ```
 
-
 ```cpp
 // Struct as a class blueprint
 struct Employee

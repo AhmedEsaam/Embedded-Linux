@@ -30,7 +30,9 @@ int main()
     print(5);
 
     print<int, int>(5, 6);
-    print<std::string, int>("a", 6);
+    // print<std::string, int>("a", 6);
+
+    
 
     return 0;
 }
