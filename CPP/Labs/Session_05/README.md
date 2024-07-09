@@ -165,7 +165,7 @@ int main(void)
 ### `const` vs `constexpr`
 
 | **const** | **constexpr** |
-| :----: | :----: |
+| :---- | :---- |
 | resolved in run-time | resolved in compile time |
 | used with variables, pointers or functions | used with variables, functions, or `constexpr` if-statemnet |
 

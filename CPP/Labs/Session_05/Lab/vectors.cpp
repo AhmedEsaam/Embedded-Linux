@@ -89,7 +89,7 @@ public:
         {
             int val = array[currentSize - 1];
 
-            array[currentSize - 1] = 0; // ?
+            array[currentSize - 1] = 0;
 
             currentSize--;
         }
@@ -156,40 +156,65 @@ public:
 
 int main(void)
 {
+    /* Push 5 values */
     DynamicArray dynArr;
-
-    std::cout << "pushing 5 values:" << std::endl;
-
     dynArr.pushBack(5);
     dynArr.pushBack(3);
     dynArr.pushBack(2);
     dynArr.pushBack(1);
-    dynArr.pushBack(6);
+    dynArr.insertAt(2, 6);
+    std::cout << "pushing 5 values:" << std::endl;
     dynArr.print();
     std::cout << "size = " << dynArr.size() << std::endl;
     std::cout << "current size = " << dynArr.current_size() << std::endl;
 
+    /* Pop 1 value */
+    dynArr.popBack();
     std::cout << std::endl
               << "poping 1 value:" << std::endl;
-    dynArr.popBack();
     dynArr.print();
     std::cout << "size = " << dynArr.size() << std::endl;
     std::cout << "current size = " << dynArr.current_size() << std::endl;
 
+    /* Push at the middle */
+    dynArr.insertMiddle(10);
     std::cout << std::endl
               << "pushing 1 value at the middle:" << std::endl;
-    dynArr.insertMiddle(10);
     dynArr.print();
     std::cout << "size = " << dynArr.size() << std::endl;
     std::cout << "current size = " << dynArr.current_size() << std::endl;
 
+    /* Remove at index 1 */
+    dynArr.removeAt(1);
     std::cout << std::endl
               << "remove value at index 1:" << std::endl;
-    dynArr.removeAt(1);
     dynArr.print();
     std::cout << "size = " << dynArr.size() << std::endl;
     std::cout << "current size = " << dynArr.current_size() << std::endl;
 
+    /* Copying the dynamic array into a new one */
+    DynamicArray dynArr2 = dynArr;
+    std::cout << std::endl
+              << "Copying the dynamic array:" << std::endl;
+    dynArr2.print();
+    std::cout << "size = " << dynArr2.size() << std::endl;
+    std::cout << "current size = " << dynArr2.current_size() << std::endl;
+
+    /* Creating a dynamic array with initial values of zeros */
+    DynamicArray dynArr_initialized(3, 0);
+    std::cout << std::endl
+              << "Creating the dynamic array with 0 values" << std::endl;
+    dynArr_initialized.print();
+    std::cout << "size = " << dynArr_initialized.size() << std::endl;
+    std::cout << "current size = " << dynArr_initialized.current_size() << std::endl;
+
+    /* Using the initializer list to initilaize the dynamic array */
+    DynamicArray dynArr3(5, {1, 2, 3});
+    std::cout << std::endl
+              << "initialize with an initializer list:" << std::endl;
+    dynArr3.print();
+    std::cout << "size = " << dynArr3.size() << std::endl;
+    std::cout << "current size = " << dynArr3.current_size() << std::endl;
 
     return 0;
 }
