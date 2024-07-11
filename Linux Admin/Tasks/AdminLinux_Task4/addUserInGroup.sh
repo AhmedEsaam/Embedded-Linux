@@ -20,6 +20,7 @@ fi
 
 # Display relevant user information
 echo ' '
+echo -----------------------------------------------------
 echo "User information:"
 echo "user id: "$(id -u ${userName})
 sudo cat /etc/passwd | grep ${userName} | tr : \\n | tr , \\n
@@ -27,9 +28,7 @@ sudo cat /etc/passwd | grep ${userName} | tr : \\n | tr , \\n
 
 # Display relevant group information
 echo ' '
+echo -----------------------------------------------------
 echo "Group information:"
 echo "group members: "$(sudo groupmems -g ${groupName} -l)
 sudo getent group ${groupName} | tr : ' '
-
-
-
