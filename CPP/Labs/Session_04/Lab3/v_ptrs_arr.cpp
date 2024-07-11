@@ -95,8 +95,8 @@ int main()
     int *pInt1 = &x;
     int *pInt2 = &y;
 
-    setValue(pInt1, 4);
-    setValue(pInt2, 3);
+    arr.setValue(pInt1, 4);
+    arr.setValue(pInt2, 3);
 
     return 0;
 }
