@@ -5,7 +5,7 @@ To run the Bash script:
 ## Shebang
 
 Start your code script with
-**Shebang**:`#!/bin/bash` Tells the terminal that this is script is written in `bash`, so it must run using bash.
+**Shebang**:`#!/bin/bash` it tells the terminal that this script is written in `bash`, so it must run using bash.
 
 ## Bash script environment variables
 
@@ -21,7 +21,7 @@ Start your code script with
 ```bash
 ./file.sh               # user must have permission to execute
 chmod +x ./file.sh      # give permission to execute
-chmod -x ./file.sh      # to undo permissionrunrunningning
+chmod -x ./file.sh      # to undo permission to run
 ```
 
 * if you did not use the **shebang**, it will use the current running shell.
@@ -31,21 +31,21 @@ chmod -x ./file.sh      # to undo permissionrunrunningning
 ### 2. `bash ./file.sh`
 
 ```bash
-bash ./file.show      
+bash ./file.sh      
 ```
 
 * if you did not use the **shebang**, it will use `bash`.
 
 ### 3. `source ./file.sh` (not supported in `sh`, but supported in `bash`)
 
-To run the script within the same bash process (no child craeted):
+To run the script within the same bash process (no child created):
 
 ```bash
 pstree -p               # show processes tree (-p to print processes id)
-source ./file.show      
+source ./file.sh      
 ```
 
-* This will allow you to use the variables created in this script
+* This will allow you to use the variables created in this script in the parent terminal.
 
 ### 4. `. ./file.sh` (another way to run as source)
 
@@ -56,7 +56,7 @@ source ./file.show
 ## Variables
 
 * Variable name can't start with a number
-* No spaces (ex. name = 5 => Error)
+* No spaces (ex. name = 5 (Error))
 * To put a string, put "" or '' (ex. name= "ahmed essam")
 
 ### To access a variable
@@ -82,7 +82,7 @@ var2="Hello $var"
 echo $var2      # => Hello iti
 
 var3='Hello $var'
-echo $var3      # => Hello $iti
+echo $var3      # => Hello $var
 ```
 
 ### Take inputs
