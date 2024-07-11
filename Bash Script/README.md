@@ -9,10 +9,12 @@ Start your code script with
 
 ## Bash script environment variables
 
-`$@`
-`$#`
-`$0`
-...
+`$0`: returns the script file name.
+`$#`: the total number of arguments passed to the script file.
+`$@`: lists all passed arguments to the script as separate values.
+`$*`: lists all passed arguments to the script as a single string.
+`$1`: script argument number one ...
+`$?`: holds the exit status of the last executed command (0: success, non-zero: error).
 
 ## To Run the script
 
