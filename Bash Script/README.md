@@ -92,9 +92,7 @@ read -sp "Enter password" password      # -s to hide input password
 echo $Password
 ```
 
-### To store the output of the command into a var
-
-`output=$(command)`
+### To store the output of the command into a var : `output=$(command)`
 
 ```Bash
 output=$(date)
@@ -129,7 +127,7 @@ var4=var4+1     # no spaces
 
 There are 3 types of conditions:
 
-#### 1. integers condition
+#### 1. integer conditions
 
 * `-eq` : equal
 * `-ne` : not equal
@@ -192,9 +190,9 @@ echo $?
 
 #### Syntax
 
-* Syntax 1: `( condition1 ) && ( condition2 ) ...`
-* Syntax 2: `(( condition1 && condition2 ...))`
-* Syntax 3: `( condition1 &&,-a condition2 ...)`
+* Syntax 1: `[ condition1 ] && [ condition2 ] ...`
+* Syntax 2: `[[ condition1 && condition2 ...]]`
+* Syntax 3: `[ condition1 -a condition2 ...]`
 
 #### Syntax using `test`
 
@@ -388,7 +386,7 @@ The behaviour of `[@]` differs from `[*]` when putting qutation marks `""`
 echo "${fruits[@]}" # "apple" "banana" "cherry"
 echo "${fruits[*]}" # "apple banana cherry"
 
-# [@] is better with for loops as it will consider every element
+# [@] is better with 'for loops' as it will consider every element
 for var in "${fruits[@]}"; do
     echo $var
 done
@@ -396,7 +394,7 @@ done
 
 `"${fruits[@]}"` considers every element,
 
-while `"${fruits[*]}"` considers the array as one unit.
+while `"${fruits[*]}"` considers the array as a one unit.
 
 ##### Example1
 
@@ -481,7 +479,7 @@ declare -i var=5
 $var=$var+5
 ```
 
-* You cannot define associated array other than by explicit declaration
+* You cannot define associated array using other than explicit declaration
 
 ```bash
 #declare array
@@ -522,7 +520,7 @@ done
 
 ---
 
-### To remove array
+### To remove an array element
 
 ```bash
 fruits=("apple" "banana" "melon")
@@ -571,7 +569,7 @@ string="Mostafa Tera"
 echo ${#string}     # print the number of characters inside the string
 ```
 
-### Print Substring ${#string:start at index:number of characters}
+### Print Substring `${#string:start at index:number of characters}`
 
 ```bash
 string="Mostafa Tera"
@@ -594,7 +592,7 @@ fi
 To concatinate two strings:
 
 ```bash
-string2=${string1}+Mustafa
+string2=${string1}Mustafa
 ```
 
 ---
