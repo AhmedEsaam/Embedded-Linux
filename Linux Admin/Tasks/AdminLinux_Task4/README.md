@@ -79,7 +79,7 @@ Here is the list of all the possible cases:
 
 ![check useradd](screenshots/section2.5.2.png)
 
-##### * Creating new user using `useradd`
+##### Creating new user using `useradd`
 
 ![useradd](screenshots/section2.5.3.png)
 
