@@ -278,6 +278,20 @@ T max(T a, T b)
 }
 ```
 
+### template class in header myClass.h while class function implementation is in myClass.cpp
+
+* including .h file in main.c, compiler will not know how to instantiate the class function. As the implementation is in myClass.cpp
+
+* Solution
+
+1. export the class in .h file
+
+```cpp
+export class MyClass {...};
+```
+
+2. Put the function implementatin in the header file with the class.
+
 ---
 
 ## Name Mangling
