@@ -44,3 +44,31 @@ void func(std::string_view& str)    // more efficient than 'const reference'
 ---
 
 ## Vectors and Arrays
+
+```cpp
+#include <vector>
+
+std::vector<int> v = {1, 2, 3, 4, 5};
+
+std::vector v2(5);      // 5 elements
+
+std::vector v3(5, 0);   // 5 elements initialized with zero
+
+v.push_back(value);
+v.pop_back(value);
+
+v.insert();
+v.erase();
+v.resize();
+
+//2-d vector 
+std::vector<std::vector<int>> v2d = {{1, 2, 3},
+                                    {4, 5}};
+
+v2d[0].push_back(20);
+v2d.push_back({11,12,13});      // weak performance because of reallocating vector
+```
+
+```cpp
+
+```

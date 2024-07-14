@@ -209,7 +209,7 @@ int main(void)
     std::cout << "current size = " << dynArr_initialized.current_size() << std::endl;
 
     /* Using the initializer list to initilaize the dynamic array */
-    DynamicArray dynArr3(5, {1, 2, 3});
+    DynamicArray dynArr3(5, std::initializer_list<int>{1, 2, 3});
     std::cout << std::endl
               << "initialize with an initializer list:" << std::endl;
     dynArr3.print();
