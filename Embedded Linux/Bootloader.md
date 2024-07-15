@@ -130,4 +130,11 @@ Variables:
 `$kernel_addr_r`: the address of the kernel
 `$fat_addr_r`:
 
+---
+
+## Boot from server
+
+We will load from the application `TFTP` `:69` (trivial file transport protocol)
+
+* We will use it because it is used in u-boot.
 
