@@ -19,14 +19,20 @@ int main()
     /* Define input file */
     std::ifstream input{"input.txt", std::ios::in};
 
+    /* Define output file */
+    std::ofstream output{"output.txt", std::ios::out};
+
+    /* define integer array to hold input values */
     const int MAX = 20;
     int arr[MAX];
 
+    /* Define result variables */
     int sum = 0, min = 0, max = 0;
     double avg;
 
     int i = 0;
 
+    /* Input values until the end of file */
     while (!input.eof())
     {
         /* Get number */
@@ -69,9 +75,6 @@ int main()
     std::cout << sum << " " << avg << " " << min << " " << max << std::endl;
 
     /* Writing results to output.txt */
-
-    /* Define output file */
-    std::ofstream output{"output.txt", std::ios::out};
 
     /* Print table heads */
     output << "-------------------------------------------------------------------------" << std::endl;
