@@ -90,7 +90,7 @@ int main()
     output << std::endl
            << "-------------------------------------------------------------------------" << std::endl;
 
-    /* Calcualte each table value number of digits to always print the value in the middle of the cell */
+    /* Calcualte the number of digits for each value to always print the value in the middle of the cell */
     int sum_digits = noOfDigits(sum);
     int avg_digits = noOfDigits(static_cast<int>(avg)) + 2; // 2: is the fixed number of digits after the floating point
     int min_digits = noOfDigits(min);
