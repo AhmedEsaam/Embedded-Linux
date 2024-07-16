@@ -7,16 +7,17 @@ std::vector<std::vector<int>> transpose(const std::vector<std::vector<int>> &v2d
     /* Define transposed matrix with the size of the row of the given matrix */
     std::vector<std::vector<int>> transposed(v2d[0].size());
 
-    int trans_row = 0;
+    int trans_row;
 
     for (auto &row : v2d)
     {
+        trans_row = 0;
+
         for (auto &val : row)
         {
             transposed[trans_row].push_back(val);
             trans_row++;
         }
-        trans_row = 0;
     }
 
     return transposed;
