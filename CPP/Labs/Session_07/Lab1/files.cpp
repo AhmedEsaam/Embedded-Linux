@@ -78,14 +78,15 @@ int main()
 
     /* Print table heads */
     output << "-------------------------------------------------------------------------" << std::endl;
+
     std::string heads[4] = {"Sum", "Avg", "Min", "Max"};
     output << "|";
+
     for (int i = 0; i < 4; ++i)
     {
         output << std::setw(10) << heads[i] << std::setw(8) << "|";
     }
 
-    /* Print table values */
     output << std::endl
            << "-------------------------------------------------------------------------" << std::endl;
 
