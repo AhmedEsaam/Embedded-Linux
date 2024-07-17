@@ -395,11 +395,7 @@ public:
     // Derived(int x) : Example(x) 
     // {}
 
-    using Example::Example; // Used to copy the constructors from Base class to the Derived class
-    // This is another way of the above constructor 
-    // (if passed an int --> it calls the Example(int) constructor)
-    // But it has low priority if you implemented the Derived constructor
-};
+    using Example::Example;     // Used to copy the constructors from Base class to the Derived class
 
 int main(void)
 {
@@ -408,6 +404,12 @@ int main(void)
     return 0;
 }
 ```
+
+* `using Base::Base` : is Used to copy the constructors from Base class to the Derived class.
+
+  * Which is another way of the `Derived(int x) : Example(x) {}` constructor.
+  * (if the constructor is passed an int --> it calls the Example(int) constructor).
+  * But it has **low priority** if you implemented the Derived class constructor.
 
 ---
 
@@ -469,8 +471,8 @@ int main(void)
 
     // If we want to call the override func() in the Derived class:
 
-    pBObj->func();      // calls Derived::func() which is an overrided virtual function 
-                        // The pointer calls the function which address is in the virtual table of the Base class
+    pBObj->func();          // calls Derived::func() which is an overrided virtual function 
+                            // The pointer calls the function which address is in the virtual table of the Base class
 
     return 0;
 }
