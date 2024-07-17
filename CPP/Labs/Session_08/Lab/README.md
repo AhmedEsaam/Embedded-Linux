@@ -7,3 +7,7 @@ It is required to make a game of trying to hit a battleship residing in a random
 ## Example Run
 
 ![battleship](screenshots/battleship.png)
+
+## Example of a Game Over
+
+![gameover](screenshots/gameover.png)

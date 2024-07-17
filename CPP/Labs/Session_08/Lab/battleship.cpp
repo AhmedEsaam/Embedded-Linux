@@ -23,7 +23,7 @@ public:
 
         m_board[m_locationX][m_locationY] = true;
 
-        std::cout << m_locationX << " " << m_locationY << std::endl; // for testing
+        // std::cout << m_locationX << " " << m_locationY << std::endl; // for testing
     }
 
     bool guess(int x, int y)
@@ -49,7 +49,6 @@ public:
         else if (x < 5 && x >= 0 && y < 5 && y >= 0)
         {
             std::cout << "You missed! ... You have " << m_maxGuesses - m_guesses << " guesses left." << std::endl;
-            std::cout << "You missed the raw and the column of the battleship." << std::endl;
         }
         else
         {
@@ -64,7 +63,8 @@ public:
     {
         if (m_guesses >= m_maxGuesses)
         {
-            std::cout << "Game Over! ... You have no guesses left." << std::endl;
+            std::cout << std::endl
+                      << "Game Over! ... You have no guesses left." << std::endl;
         }
 
         return (m_guesses >= m_maxGuesses);
