@@ -23,32 +23,37 @@ public:
 
         m_board[m_locationX][m_locationY] = true;
 
-        std::cout << m_locationX << " " << m_locationY << std::endl;
+        std::cout << m_locationX << " " << m_locationY << std::endl; // for testing
     }
 
     bool guess(int x, int y)
     {
+        ++m_guesses;
+
         if (x == m_locationX && y == m_locationY)
         {
-            m_guesses++;
             std::cout << "You hit the battleship!" << std::endl;
             std::cout << "You won in " << m_guesses << " guesses!" << std::endl;
             return true;
         }
         else if (x == m_locationX)
         {
-            m_guesses++;
             std::cout << "You missed! ... You have " << m_maxGuesses - m_guesses << " guesses left." << std::endl;
             std::cout << "You are in the same row as the battleship." << std::endl;
         }
         else if (y == m_locationY)
         {
-            m_guesses++;
             std::cout << "You missed! ... You have " << m_maxGuesses - m_guesses << " guesses left." << std::endl;
             std::cout << "You are in the same column as the battleship." << std::endl;
         }
+        else if (x < 5 && x >= 0 && y < 5 && y >= 0)
+        {
+            std::cout << "You missed! ... You have " << m_maxGuesses - m_guesses << " guesses left." << std::endl;
+            std::cout << "You missed the raw and the column of the battleship." << std::endl;
+        }
         else
         {
+            --m_guesses;
             std::cout << "Your guess is out of bounds." << std::endl;
         }
 
