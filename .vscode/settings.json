@@ -104,6 +104,7 @@
     "fstream": "cpp",
     "sstream": "cpp",
     "ctime": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "cinttypes": "cpp"
   }
 }
