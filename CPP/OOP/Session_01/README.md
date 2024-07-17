@@ -1,4 +1,4 @@
-# OOP
+# OOP - Session 01
 
 * Applications are consisted of **source** files and **header** files.
 
