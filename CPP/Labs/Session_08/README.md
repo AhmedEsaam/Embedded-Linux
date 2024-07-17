@@ -233,8 +233,6 @@ catch ( ... )      // Catch any type of exception
 }
 ```
 
----
-
 ### Stack Unwinding
 
 * `RAII`: **Resource Aquisition Is Initialization** which means that the resource is tied to the object life time (Any defined container handles its dynamic allocated memory by freeing it when it goes out of scopes).
