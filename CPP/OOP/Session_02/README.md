@@ -359,7 +359,7 @@ public:
 
 | public | protected | private |
 | :----: | :-------: | :-----: |
-| The **Derived** class does not restrict for itself any access specifier in the Base class |  Access specifiers from the **Base** class are restricted so that no one is more than `protected` in the **Derived** class | Access specifiers from the **Base** class are restricted so that no one is more than `private` in the **Derived** class|
+| The **Derived** class does not restrict for itself any access specifier in the **Base** class |  Access specifiers from the **Base** class are restricted so that no one is more than `protected` in the **Derived** class | Access specifiers from the **Base** class are restricted so that no one is more than `private` in the **Derived** class|
 | Every access specifier in the **Perent** class retains its accessibility in the **Derived** class | `public` members in **Base** are `protected` in the **Derived** class | All **Base** class members are `private` for the **Derived** class |
 | ↓↓↓ | ↓↓↓ | ↓↓↓ |
 | **private** in Base : **private** in Derived | **private** in Base : **private** in Derived | **private** in Base : **private** in Derived |
