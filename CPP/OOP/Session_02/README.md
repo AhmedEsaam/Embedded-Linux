@@ -9,7 +9,7 @@ class Example
 func(Example());    // A temporary object is passed
 ```
 
-* `RVO` **Return Value Optimization**: is compiler optimization technique used in C++ to eliminate unnecessary copying of objects returned from functions.
+* `RVO` **Return Value Optimization**: is a compiler optimization technique used in C++ to eliminate unnecessary copying of objects returned from functions.
 
 ```cpp
 MyObject createObject() {
@@ -40,7 +40,7 @@ int main(void)
 
 ---
 
-## Friend Class
+## Friend Class and Friend Function
 
 ```cpp
 class Example 
@@ -61,7 +61,7 @@ void function(Example e)      // function() is friend to the Example class, so, 
 class MyClass
 {
 private:
-    Example obj;                // MyClass has access to obj private members
+    Example obj;                // MyClass is friend to the Example class, so, has access to obj private members
 
 public:
     int getX()
@@ -79,7 +79,7 @@ public:
 
     1. initializer list.
     2. parametarized constructor.
-    3. substitute normally same as structure.
+    3. substitute normally (same as structure).
 
 ```cpp
 class A
@@ -130,6 +130,8 @@ int main(void)
 
 * You can use `delete` to eliminate any type of constructor.
 
+* Use `const` to prohibit mutating the object data members. (it passes the `this` pointer as `const`)
+
 ```cpp
 class Example
 {
@@ -162,7 +164,7 @@ int main(void)
 
 ### 1. Single Inheritance
 
-A class inherits one single class.
+* A class inherits one single class.
 
 ```cpp
 class A
@@ -178,7 +180,7 @@ class B : public A
 
 ### 2. Hierarchical Inheritance
 
-One class is a base to more than one derived class.
+* One class is a base to more than one derived class.
 
 ```cpp
 class RCC
@@ -210,7 +212,7 @@ class UART : public RCC
 
 ### 3. Multiple Inheritance
 
-A derived class inherits more than one base class.
+* A derived class inherits more than one base class.
 
 ```cpp
 class Base1
@@ -225,7 +227,7 @@ class Derived : public Base1, public Base2  // constructor of Base1 is called be
 
 ### 4. Multi-level Inheritance
 
-A class is base to another class which in turn is a base to another third class and so on.
+* A class is base to another class which in turn is a base to another third class and so on.
 
 ```cpp
 class Base1
@@ -240,9 +242,9 @@ class Derived : public Base2
 
 ### 5. Hybrid Inheritance
 
-Diamond shape inheritance. **NOT RECOMMENDED**
+* Diamond shape inheritance. **(NOT RECOMMENDED)**
 
-It is a compination between **Hierarchical Inheritance** and **Multiple Inheritance**.
+* It is a compination between **Hierarchical Inheritance** and **Multiple Inheritance**.
 
 ```cpp
 class Base
@@ -262,9 +264,9 @@ class child : public Derived1, public Derived2
 
 ## Common and Unique
 
-Always think of what is a **common** and what is a **unique** between entities.
+* Always think of what is a **common** and what is a **unique** between entities.
 
-You can put common properties in a **Base** class, and unique properties in **Derived** classes.
+* You can put common properties in a **Base** class, and unique properties in **Derived** classes.
 
 ### **Inheritance:** `is a` relationship
 
@@ -280,9 +282,11 @@ class ARM_DIO : public DIO
 };
 ```
 
-* **ARM_DIO** `is a` **DIO**.
+* **ARM_DIO** `is a` **DIO**
 
-### **Composition:** `has a` relationship
+### `has a` relationships
+
+#### **Composition**
 
 ```cpp
 class RCC
@@ -296,9 +300,11 @@ class GPIO
 };
 ```
 
-* **GPIO** `has an` **RCC** object.
+* **GPIO** `contains` an **RCC** object.
 
-### **Aggregaion**
+* (**GPIO** creates an **RCC** object which is deleted with the **GPIO** obejct when it goes out of scope.)
+
+#### **Aggregaion**
 
 ```cpp
 class Employee
@@ -318,21 +324,46 @@ public:
 };
 ```
 
-### **Association**
+* **Company** `aggregates` **Employee**
+
+* (**Company** cannot be constructed without **Employee** but the **Employee** is not deleted when **Company** goes out of scope.)
+
+#### **Association**
 
 ```cpp
+class Course
+{
+};
 
+class Seminar
+{
+    Course* cou;
+
+public:
+    void Offer(Course* e)
+    {
+        ...
+    }
+};
 ```
+
+* The **Course** `is associated with` **Seminar**
+
+* (The **Seminar** can be constructed without **Course** and The **Course** is not deleted when **Seminar** goes out of scope.)
 
 ---
 
 ## Types of Inheritance
 
-* The Derived class can only restrict accessibility for itself for the Base class members.
+* The Derived class **can only restrict accessibility** for itself to the Base class members.
 
 | public | protected | private |
-| :----- | :----- | :----- |
+| :----: | :-------: | :-----: |
 | Every access specifier in the **Perent** class retains its accessibility in the **Derived** class | `protected` and `public` members in **Base** are `protected` in the **Derived** class | All **Base** class members are `private` for the **Derived** class |
+| ↓↓↓ | ↓↓↓ | ↓↓↓ |
+| **private** in Base : **private** in Derived | **private** in Base : **private** in Derived | **private** in Base : **private** in Derived |
+| **protected** in Base : **protected** in Derived | **protected** in Base : **protected** in Derived | `protected in Base : private in Derived` |
+| **public** in Base : **public** in Derived | `public in Base : protected in Derived` | `public in Base : private in Derived` |
 
 ---
 
@@ -352,7 +383,7 @@ public:
 
     // Example() = {}           // x = garbage value
     
-    Example() = default;        // 'default' signals the compiler to create a default constructor and puts x = 0
+    Example() = default;        // 'default': signals the compiler to create a default constructor and puts x = 0
 };
 
 class Derived : private Example
@@ -415,7 +446,7 @@ public:
     void display();
 
     virtual void func() const;
-    // the compiler implicitly creates a pointer vfptr* that holds the addresses of the overrided functions of this virtual function in the virtual table of this class.
+    
 };
 
 class Derived : public Base
@@ -425,10 +456,6 @@ public:
     void display();
 
     void func() const override;   // overrided virtual function
-    // use 'override' to indicate that this function is overrided (which leads to checking the function signature if it matches one of the parent class functions in compile-time.)
-
-    // And it makes the code more self-documented.
-
 };
 
 int main(void)
@@ -448,30 +475,37 @@ int main(void)
 }
 ```
 
+* The compiler implicitly creates a pointer `vfptr*` that holds the addresses of the overrided functions of this virtual function in the **virtual function table** of this class.
+
+* Use `override` in the Derived class func() to indicate that this function is overrided. Which is useful in:
+
+  1. It makes the compiler check the function signature if it matches one of the parent class functions in compile-time.
+  2. And it makes the code more self-documented.
+
 ### Base Class Virtual Table
 
 * The base class which contains a virtual function contains a `vfptr*` pointer which points to the **Virtual Function Table** which in turn holds pointers to the addresses of the overrided functions of the Base class virtual function.
 
 * When the virtual function is called through a Base pointer or refernce, the `vfptr*` determines which **table** to use (here, the Base class virtual table), and then which function to call from that **table**.
-* 
-| | Pointers' Values : Addresses of the Overrided Virtual Functions in the Derived Classes |
+
+| Overrides of the virtual function | Pointers' Values : Addresses of the Overrides of Virtual Functions in the Derived Classes |
 | :---: | :---: |
-| Derived1::func | 0x545465 |
-| Derived2::func | 0x276334 |
-| Derived3::func | 0x879466 |
+| Derived1::func() | 0x545465 |
+| Derived2::func() | 0x276334 |
+| Derived3::func() | 0x879466 |
 | ... | ... |
 
 ```cpp
-pBObj->func();  // The pBobj `vfptr*` --> points to the base class virtual table --> gets the desired function implementation address.
+pBObj->func();  // The pBobj `vfptr*` --> points to the Base class virtual table --> gets the required function implementation address.
 ```
 
 ---
 
 ## Abstract Class
 
-Is a class which has atleast one pure virtual function.
+* Is a class which has **at-least one pure virtual function**.
 
-You Cannot create an object of the abstract class.
+* You **Cannot create an object of the abstract class.**
 
 ```cpp
 class A
