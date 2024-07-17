@@ -24,7 +24,7 @@ Syntax:
 * variables inside the lambda functions are always `static`.
 * **Static variables** in the wider scope **can be accessed** inside the lambda function.
 
-### Lambda Functions can be stored in avariable
+### Lambda Functions can be stored in a variable
 
 ```cpp
 
@@ -132,13 +132,13 @@ int main(void)
 
 ## Algorithms
 
-You can directly use one of the standard algorithms in the `algorithm` library like `std::sort()` and `std::find()`.
+You can directly use one of the standard algorithms in the `algorithm` library such as `std::sort()` and `std::find()`.
 
 ---
 
 ## Exceptions
 
-An exception is a **Run-Time Error** that can be handles through **Exception Handling**.
+An exception is a **Run-Time Error** that can be handled through **Exception Handling**.
 
 Exception handling is done using three keywords:
 
@@ -237,7 +237,7 @@ catch ( ... )      // Catch any type of exception
 
 ### Stack Unwinding
 
-* `RAII`: Resource Aquisition Initialization (Any defined container handles its dynamic allocated memory by freeing it when out of scopes).
+* `RAII`: **Resource Aquisition Is Initialization** which means that the resource is tied to the object life time (Any defined container handles its dynamic allocated memory by freeing it when it goes out of scopes).
 
 * Always use standard library containers as they achieve `RAII` as they handles there allocated memory, so no need to worry about non-executed freeing memory in the `try` blocks.
 
@@ -252,14 +252,14 @@ catch ( ... )      // Catch any type of exception
 | **func_2()** | contains a **catch** for `int` | the `double` exception is not catched, so goes to the calling **func_1()** and the rest of **func_2()** is not executed | if the rest code frees an allocated memory, it will not be freed |
 | **func_3()** | contains a **catch** for `double` | the `double` exception goes to the calling **func_2()** and the rest of **func_3()** is not executed | if the rest code frees an allocated memory, it will not be freed |
 
-* **IMPORTANT:** always use `try` and `catch` im the main() function to catch any throwed error.
-  * If you did not, may be a throwed exception that has not been handled which causes the remained code still be in stack after the termination of the application. And that is **compiler dependent**.
+* **IMPORTANT:** always use `try` and `catch` in the **main()** function to catch any throwed error.
+  * If you did not, may be a throwed exception that has not been handled which causes the remained code to still be in stack after the termination of the application. But, this is **compiler dependent**.
 
 ### An Exception Class
 
 You can define an exception class to make the exception carries more than one data variable, each tells a specific info about the exception.
 
-* **Note:** The exception objects must be copyable (do not delete the copy constructor in your created exception class). So as to allow the exception to be copied when copying an object that throws this exception.
+* **Note:** The exception objects must be **copyable** (do not delete the copy constructor in your created exception class). So as to allow the exception to be copied when copying an object that throws this exception.
 
 * **Note:** In inheritance, to rethrow an exception just use the `throw` keyword without arguments.
 
