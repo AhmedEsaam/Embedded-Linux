@@ -132,6 +132,8 @@ int main(void)
 
 ## Algorithms
 
+You can directly use one of the standard algorithms in the `algorithm` library like `std::sort()` and `std::find()`.
+
 ---
 
 ## Exceptions
