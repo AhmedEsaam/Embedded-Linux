@@ -5,29 +5,11 @@
 class Solution
 {
 public:
-    void bubbleSort(std::string &str)
-    {
-        char tmp;
-
-        for (int i = 0; i < str.size() - 1; ++i)
-        {
-            for (int j = i + 1; j < str.size(); ++j)
-            {
-                if (str[i] > str[j])
-                {
-                    tmp = str[i];
-                    str[i] = str[j];
-                    str[j] = tmp;
-                }
-            }
-        }
-    }
-
     bool isAnagram(std::string s, std::string t)
     {
 
-        bubbleSort(s);
-        bubbleSort(t);
+        std::sort(s.begin(), s.end());
+        std::sort(t.begin(), t.end());
 
         return (s == t);
     }

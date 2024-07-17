@@ -39,7 +39,7 @@ It is required to add two numbers represented as strings and the result is a str
 
 Given two strings, it is required to check if they are anagrams to each other. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase.
 
-![valid anagram](screenshots/anagram.png)
+![valid anagram](screenshots/anagram1.png)
 
 ---
 

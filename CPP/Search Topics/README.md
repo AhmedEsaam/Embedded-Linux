@@ -49,3 +49,7 @@ int main()
 ---
 
 ## Stack Canary?
+
+---
+
+## Functors
