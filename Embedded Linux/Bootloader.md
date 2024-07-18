@@ -30,7 +30,7 @@ cd u-boot
 make menuconfig
 ```
 
-### How to Configure the `u-boot`:
+### How to Configure the `u-boot`
 
 #### 1. Board Configuration
 
@@ -108,13 +108,14 @@ saveenv
 make menuconfig
 
 ```
+
 enable editenv
 
 ### `uboot.env`
 
 An environment variable that the u-boot stores the needed variables in which it needs while run-time.
 
-###  Loading kernel
+### Loading kernel
 
 Kernel needs to files: zimage and fdt files
 
@@ -137,4 +138,3 @@ Variables:
 We will load from the application `TFTP` `:69` (trivial file transport protocol)
 
 * We will use it because it is used in u-boot.
-
