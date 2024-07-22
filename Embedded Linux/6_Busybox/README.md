@@ -158,3 +158,81 @@ node::action:Application to run
 
 ---
 
+## `initramfs` and `initrd`
+
+* We creates a packup of **essential** commands in (/bin, /sbin, /usr) and store it compressed in RAM in case of a failure of the rootfs.
+
+* First, you must compile _install **static**.
+* Running `initrd` (init ram disk) will create initrd.cpio.xz
+* Put it under boot
+* Now we have under `boot`: (this boot partition are usually locked)
+* > initrd.cpio.xz
+* > u-boot
+* > .dtb
+* > zImage
+* > extlinux/extlinux.conf
+* > u-boot.env
+
+### Its Pros
+
+1. Execution process is faster
+2. Gives the ability to switch between two banks (two ext4 rootfs) using `chroot`
+3. Security (it check sums the ext4 partition)
+4. Recovery (if the rootfs has failed)
+
+* First: `fatload mmc 0:1 ${initramfs} cpio.xz` putting the cpio.xz in **RAM**.
+
+* Now we give `bootargs`:
+  * `initrd=/bin/sh`      # this will go to the the shell in ram
+    * or you can put a script that does checksum and check banks
+
+  * `init=/sbin/init`     # this will go to the init in rootfs
+  * You can use `INIRD` in `extlinux.conf`
+
+* boot from initrd:
+
+```shell
+bootz $kernel $initramfs $dtb
+```
+
+* Then within initrd
+
+```shell
+mount /dev/mmcblk0p2 /media
+chroot /media
+```
+
+* This will initiate at `initrd`
+
+* if we do:
+
+```shell
+bootz $kernel - $dtb
+```
+
+* This will initiate at `init`
+
+* Create `/etc/passwd`, `/etc/shadow`, `/etc/group`
+
+---
+
+## Task
+
+* Boot from initrd with an application in c to choose between two ext4 rootfs.
+* Depending on the input (1 or 2), run...
+
+```shell
+mount /dev/mmcblk0p[2 or 3] /media
+chroot /media
+```
+
+Or
+
+* just write the script with shell in `initrd/rcs`
+  * Here, we put `initrd=/sbin/init`
+
+---
+
+## NFS (Network File System)
+
+* To put the `rootfs` on the **Server** and the **Client** calls the commands from the rootfs and runs it using its **RAM**.
