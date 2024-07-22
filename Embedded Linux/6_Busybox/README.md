@@ -125,3 +125,36 @@ node::action:Application to run
     * `ctrlaltdel`: do a certain action
     * `shutdown`: close application
 
+### Errors while compiling Busybox
+
+* TC
+
+> search for `CONFIG_TC` in `.config` file and make it `=n`
+
+* Nothing in kernel
+
+> `init` that is created is not executable --> make it executable: `chmod +x init`
+
+### The Busyboc=x executable
+
+* Has a switch case on the softlink that is created pointing to the Busybox.
+* That includes init, sh, busybox softlinks.
+* Put the files under ./_install to the rootfs of the sdimage under respected files (bin, sbin, usr/bin, usr/sbin)
+* create inittab under /etc
+
+    > ::sysinit:/etc/init.d/rcs #rcs has the mounts of /dev, /sys/ proc
+
+    > ::askfirst:/bin/sh
+
+* Then mkdir all dirs under `/`
+  * Or, use:
+
+  ```shell
+  rsync -a ~/busybox/_install /media/rootfs
+  rsync -a ~/x-tools/arm/..../sysroot /media/rootfs
+  ```
+
+* Then put `init=init` in `bootargs`, or use `APPEND init=init` in the extlinux.conf file (with the bootargs has he higher priority).
+
+---
+
