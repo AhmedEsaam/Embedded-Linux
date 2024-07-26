@@ -109,32 +109,7 @@ make menuconfig
 
 ```
 
-enable editenv
-
 ### `uboot.env`
 
 An environment variable that the u-boot stores the needed variables in which it needs while run-time.
 
-### Loading kernel
-
-Kernel needs to files: zimage and fdt files
-
-```bash
-printenv kernel_addr_r  # address to store kernel
-```
-
-`fatload`: load file from fat to ram
-`md`: memory display
-
-Variables:
-
-`$kernel_addr_r`: the address of the kernel
-`$fat_addr_r`:
-
----
-
-## Boot from server
-
-We will load from the application `TFTP` `:69` (trivial file transport protocol)
-
-* We will use it because it is used in u-boot.
