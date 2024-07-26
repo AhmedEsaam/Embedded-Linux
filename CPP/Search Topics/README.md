@@ -52,4 +52,8 @@ int main()
 
 ---
 
-## Functors
+## Tearing
+
+## False Sharing
+
+## Banker's Algorithm

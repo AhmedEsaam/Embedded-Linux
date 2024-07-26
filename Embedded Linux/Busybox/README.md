@@ -1,4 +1,12 @@
-# Kernel Panic
+# Busybox
+
+* Busybox is used to populate the root file system `rootfs` with needed binaries and shell commands.
+
+* Lets start from the beginning...
+
+## Kernel Panic
+
+* When attempting to run a kernel without a rootfs, it will panic!
 
 ```txt
 Error Cannot find rootfs
@@ -67,7 +75,7 @@ helloKernel panic - not syncing: Attempted to kill init!
 
 ---
 
-## Busybox
+## Install Busybox
 
 * **Busybox** is a fork from **Coreutils** with only important commands.
 
@@ -98,7 +106,7 @@ mount -t proc /proc
 source sh
 ```
 
-* We then we need to set the `PATH` variable in order to use applications like `ls`.
+* We then need to set the `PATH` variable in order to use applications like `ls`.
 
 ### Busybox init
 
@@ -135,16 +143,17 @@ node::action:Application to run
 
 > `init` that is created is not executable --> make it executable: `chmod +x init`
 
-### The Busyboc=x executable
+### The Busybox executable
 
 * Has a switch case on the softlink that is created pointing to the Busybox.
 * That includes init, sh, busybox softlinks.
 * Put the files under ./_install to the rootfs of the sdimage under respected files (bin, sbin, usr/bin, usr/sbin)
 * create inittab under /etc
 
-    > ::sysinit:/etc/init.d/rcs #rcs has the mounts of /dev, /sys/ proc
-
-    > ::askfirst:/bin/sh
+```shell
+::sysinit:/etc/init.d/rcs #rcs has the mounts of /dev, /sys/ proc
+::askfirst:/bin/sh
+```
 
 * Then mkdir all dirs under `/`
   * Or, use:
@@ -180,7 +189,27 @@ node::action:Application to run
 3. Security (it check sums the ext4 partition)
 4. Recovery (if the rootfs has failed)
 
-* First: `fatload mmc 0:1 ${initramfs} cpio.xz` putting the cpio.xz in **RAM**.
+### How to boot the initramfs
+
+* After creating the **rootfs**, copy it to the `ext4` partition.
+
+```shell
+cp -r ./busybox/_install/ /media/ahmed-essam/rootfs
+```
+
+* Configure the inittab file in `/etc/inittab` and `/etc/init.d/rcs` as mentioned above.
+
+* Create the initramfs (by creating a **ramdisk** from a compressed rootfs using **cpio**)
+
+```shell
+cd ~/sdcard/rootfs
+find . | cpio -H newc -ov --owner root:root > ../initramfs.cpio
+cd ..
+gzip initramfs.cpio
+mkimage -A arm -O linux -T ramdisk -d initramfs.cpio.gz uRamdisk
+```
+
+#### In U-Boot
 
 * Now we give `bootargs`:
   * `initrd=/bin/sh`      # this will go to the the shell in ram
@@ -189,10 +218,29 @@ node::action:Application to run
   * `init=/sbin/init`     # this will go to the init in rootfs
   * You can use `INIRD` in `extlinux.conf`
 
-* boot from initrd:
+```shell
+setenv bootargs console=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait rdinit=/bin/sh init=/sbin/init
+```
+
+* Load the kernel **zImage**, the **dtb** file, and the resulting **uRamdisk** into **RAM**.
+
+>* **Note:** Run `bdinfo` to know memory **Start** and **End** addressesTry
+>
+>![bdinfo](<assets/Screenshot from 2024-07-27 00-31-08.png>)
+>
+>* Then try loading the kernel and the dtb file first to know how much they've occupied from >memory to `setenv` an appropriate value to the `initramfs_addr_r` environment variable.
+>
+>![memory](<assets/Screenshot from 2024-07-27 00-33-19.png>)
+
+* You can now put those commands in a file then source it from inside the u-boot, or directly set the environemnt variable `bootcmd` with them.
 
 ```shell
-bootz $kernel $initramfs $dtb
+fatload mmc 0:1 $kernel_addr_r zImage
+fatload mmc 0:1 $fdt_addr_r vexpress-v2p-ca9.dtb
+fatload mmc 0:1 $initramfs_addr_r uRamdisk
+
+#boot from initrd:
+bootz $kernel_addr_r $initramfs_addr_r $fdt_addr_r
 ```
 
 * Then within initrd
@@ -203,6 +251,10 @@ chroot /media
 ```
 
 * This will initiate at `initrd`
+
+---
+
+#### **Note:**
 
 * if we do:
 
@@ -216,7 +268,19 @@ bootz $kernel - $dtb
 
 ---
 
-## Task
+## Result
+
+* After running **Quemu** using the command:
+
+```shell
+sudo qemu-system-arm -M vexpress-a9 -m 128M -nographic -kernel u-boot -sd ~/sd1.img
+```
+
+![result](<assets/Screenshot from 2024-07-27 00-37-55.png>)
+
+---
+
+## Making the initrd choose between two root file systems
 
 * Boot from initrd with an application in c to choose between two ext4 rootfs.
 * Depending on the input (1 or 2), run...
@@ -228,7 +292,7 @@ chroot /media
 
 Or
 
-* just write the script with shell in `initrd/rcs`
+* just write the script with shell in `init.d/rcs`
   * Here, we put `initrd=/sbin/init`
 
 ---

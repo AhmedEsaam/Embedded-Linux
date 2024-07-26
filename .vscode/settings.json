@@ -105,6 +105,10 @@
     "sstream": "cpp",
     "ctime": "cpp",
     "iomanip": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "ratio": "cpp",
+    "semaphore": "cpp",
+    "stop_token": "cpp",
+    "thread": "cpp"
   }
 }
