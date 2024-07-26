@@ -68,7 +68,3 @@ std::vector<std::vector<int>> v2d = {{1, 2, 3},
 v2d[0].push_back(20);
 v2d.push_back({11,12,13});      // weak performance because of reallocating vector
 ```
-
-```cpp
-
-```
