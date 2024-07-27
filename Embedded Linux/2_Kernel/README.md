@@ -79,7 +79,7 @@ fi
 
 ## Load kernel using the `bootflow scan` command
 
-* The `bootflow scan` command perform automatic searching for the kernel in the sd card using a config file called `extlinux.conf` inside the directory `extlinux/`
+* The `bootflow scan` command perform automatic searching for the `EFI` partition (which is **Primary** and **Bootable**) to find the the kernel in the sd card using a config file called `extlinux.conf` inside the directory `extlinux/`
 
 ![alt text](<assets/setenv bootcmd to equal bootflow scan.png>)
 
