@@ -184,10 +184,10 @@ node::action:Application to run
 
 ### Its Pros
 
-1. Execution process is faster
-2. Gives the ability to switch between two banks (two ext4 rootfs) using `chroot`
-3. Security (it check sums the ext4 partition)
-4. Recovery (if the rootfs has failed)
+1. Execution process is **faster** (In the expense of RAM memory)
+2. **Dual Bbooting** by giving the ability to switch between two banks (two ext4 rootfs) using `chroot`
+3. **Security and Validation** (it check sums the ext4 partition)
+4. **Recovery** (if the rootfs has failed)
 
 ### How to boot the initramfs
 
