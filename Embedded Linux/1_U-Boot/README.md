@@ -9,10 +9,13 @@ The bootloader is used to:
 
 We use `u-boot` beacuse it:
 
-1. Supports many boards
-2. Has CLI (with his own commands)
-3. Small in size (small footprint ~2MB)
-4. Used in industry
+1. Supports many boards (unified)
+2. You can boot from a storage device or TFTP.
+3. Has CLI (with his own commands)
+4. Small in size (small footprint ~2MB)
+5. Used in industry
+
+* The U-Boot is a **unified** boatloader for the most boards, which means that you don't have to learn a new boatloader for every board.
 
 How it access the H/W?
 
@@ -40,7 +43,7 @@ ls | grep vexpress
 make vexpress_ca9x4_defconfig
 ```
 
-#### 1. Compiler (as it will run on the CPU)
+#### 2. Compiler (as it will run on the CPU)
 
 ```bash
 export export CROSS_COMPILE=arm-cortexa9_neon-linux-musleabihf- 
@@ -112,4 +115,3 @@ make menuconfig
 ### `uboot.env`
 
 An environment variable that the u-boot stores the needed variables in which it needs while run-time.
-
