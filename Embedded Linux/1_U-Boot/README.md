@@ -109,8 +109,9 @@ saveenv
 
 ```bash
 make menuconfig
-
 ```
+
+* **Note:** To quickly mount the sd.img passed to the U-Boot to your linux, you can type
 
 ### `uboot.env`
 
