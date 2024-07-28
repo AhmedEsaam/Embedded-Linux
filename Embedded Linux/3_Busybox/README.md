@@ -295,6 +295,86 @@ Or
 * just write the script with shell in `init.d/rcs`
   * Here, we put `initrd=/sbin/init`
 
+### Change rootfs using an execuatbele written in C
+
+* The C file:
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{
+    int input;
+    printf("Please enter which root file system to start at (1 or 2) [Press 0 to quit]: \n");
+    scanf("%d", &input);
+    
+    system("mount -t devtmpfs dev /dev");
+
+    switch (input)
+    {
+    case 1:
+        system("mkdir -p /mnt/rootfs_1");
+        system("mkdir -p /mnt/rootfs_1");
+        system("mount -t ext4 /dev/mmcblk0p2 /mnt/rootfs_1");
+        printf("#### Rootfs 1 ####\n");
+        system("chroot /mnt/rootfs_1");
+        break;
+
+    case 2:
+        system("mkdir -p /mnt/rootfs_2");
+        system("mount -t ext4 /dev/mmcblk0p3 /mnt/rootfs_2");
+        printf("#### Rootfs 2 ####\n");
+        system("chroot /mnt/rootfs_2");
+        break;
+
+    case 0:
+        break;
+
+    default:
+        printf("Invalid input.\n");
+        break;
+    }
+
+    return 0;
+}
+```
+
+* Build it using the cross compiler
+
+```shell
+cd ~/busybox/busybox/rootfs/bin
+
+neon-a9-gcc chRoot.c --static -o chRoot
+# neon-a9-gcc is an alias to the gcc cross compiler in x-tools/.../bin/
+
+# Make the file executable
+chmod +x chRoot
+chown root:root chRoot
+```
+
+* Then, write the command to run the file in the `/etc/init.d/rcs` script file
+
+```shell
+#!/bin/sh
+
+# mount a filesystem of type `proc` to /proc
+mount -t proc proc /proc
+
+# mount a filesystem of type `sysfs` to /sys
+mount -t sysfs sysfs /sys
+
+# mount a filesystem og type `devtmpfs` to /dev
+mount -t devtmpfs dev /dev
+
+# run an executable
+/bin/chRoot
+```
+
+* Remake the uRamdisk file like before and then run Qemu with the u-boot and choose between 1 and 2
+
+![chRoot](assets/chRoot.jpg)
+
 ---
 
 ## NFS (Network File System)
