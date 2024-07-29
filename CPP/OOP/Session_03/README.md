@@ -162,6 +162,7 @@ public:
 
 int main(void)
 {
+
     MyClass obj1, obj2;
 
     obj1 = obj2++;
@@ -241,5 +242,3 @@ int main(void)
 ```
 
 * **Note:** Passing by refernce does not require you to make any further checking in the argument like you would do with passing pointers as you have to check for the null pointer before using it.
-
-

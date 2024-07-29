@@ -112,10 +112,5 @@ int main(void)
 
     obj1.print();
 
-    // postfix return an L-Value
-    obj1++ = obj2;
-
-    obj1.print();
-
     return 0;
 }
