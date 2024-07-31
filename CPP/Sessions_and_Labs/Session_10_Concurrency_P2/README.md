@@ -65,9 +65,3 @@ std::mutex muMutex;
 ---
 
 * Read about Future & Promise.
-
----
-
-## Semaphores
-
-* 
