@@ -1,4 +1,4 @@
-# Session 09 - Concurrency
+# Session 09 - Concurrency P1
 
 ## Multi-Threading
 
@@ -14,20 +14,15 @@
    * FCFS
    * EDF
 
-### Process vs. Thread
+---
 
-| Process | Thread |
-| :-- | :-- |
-| - Hard to create & manage | - Easier to manage |
-| - Process don't share same address | - Threads share the same space **(subset of process)** |
-| - hard to share data | - Easier to share data |
-| - More context switching time | - Less context switching time |
+### Process and Thread
 
 #### Process
 
 * An executable file is called a **passive entity**.
 * As soon as it runs, it is called an **active entity**.
-* Every process has a **PCB**, which holds the process task, PID, and other information.
+* Every process has a Process Control Block **(PCB)**, which holds the process task, PID, and other information.
 
 #### Thread
 
@@ -35,6 +30,17 @@
 |:--|:--|
 |**SMT** (Simultaneous Multithreading) or Hyper Threading: every core runs two threads | Instructions to be executed (functions) |
 | **Limited**: You can check if your machine supports hyper threading using the command `lscpu` which will show the number of cores and the number of threads per core. | **Also limited**: as it is limited by memory. |
+
+#### Process and Thread Comparison
+
+| Process | Thread |
+| :-- | :-- |
+| - Hard to create & manage | - Easier to manage |
+| - Process don't share same address | - Threads share the same address space **(subset of process)** |
+| - hard to share data | - Easier to share data |
+| - More context switching time | - Less context switching time |
+
+---
 
 ### Syntax
 
@@ -45,6 +51,10 @@ std::thread obj(func, arg ...);
 // You must do
 std::thread obj(func, std::ref(arg) ...);
 ```
+
+---
+
+### Example
 
 ```cpp
 #include <iostream>
@@ -95,9 +105,13 @@ int main() // Main Thread
 thread_obj.detach();
 ```
 
-### JThread
+---
+
+### Jthread
 
 Is a thread that call join() in it's destructor, so it spares the main from joining all threads to wait until they all finish.
+
+---
 
 ### Thread Safe
 
@@ -107,12 +121,16 @@ Is a thread that call join() in it's destructor, so it spares the main from join
 
 * `std::cout <<` is not thread safe.
 
+---
+
 ### How to make a function safe on a shared resource
 
 To guarantee using multiple threads on the same resource does not cause problems:
 
 * We can use the **Mutex** class
-* Or, use atomic operations.
+* Or, use atomic operations. (In the next session)
+
+---
 
 ### Dead lock
 
@@ -123,3 +141,17 @@ To guarantee using multiple threads on the same resource does not cause problems
 * Or, when one thread is holding a resource infinitly while another thread is waiting for its release. To solve it:
   1. Use a timeout on the resource.
   2. Preempt task.
+
+#### Deadlock Conditions
+
+* Using **Mutex** to hold resoutces.
+* Hold and wait.
+* No Preemption. (No high-priority task can interrupt a running lower-priority task).
+* Circular wait.
+
+#### How to avoid the deadlock
+
+1. Using the **RAII** function (locking).
+2. Avoid **hold and wait**.
+3. Using **Preemption**.
+4. Use the Resource Allocation Graph **(RAG)** to design the system avoiding deadlocks.

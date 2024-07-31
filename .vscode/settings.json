@@ -109,6 +109,10 @@
     "ratio": "cpp",
     "semaphore": "cpp",
     "stop_token": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "chrono": "cpp",
+    "condition_variable": "cpp",
+    "mutex": "cpp",
+    "shared_mutex": "cpp"
   }
 }
