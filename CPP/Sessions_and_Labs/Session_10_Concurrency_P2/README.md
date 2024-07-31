@@ -23,7 +23,7 @@ std::atomic<T> obj;
 ### Syntax
 
 ```cpp
-std::mutex muMutex;
+std::mutex myMutex;
 ```
 
 * The mutex uses these functions
