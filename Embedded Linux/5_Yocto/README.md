@@ -73,7 +73,7 @@ cit checkout kirkstone      # the layer kirkstone branch
     * `.conf` : configuration files (**BSP** and **Distro**).
 
   * If the layer is a `meta-application` layer
-    * `.bb` : aaplication files.
+    * `.bb` : how to build the application.
     * `.bbappend` : append to bb files
     * `.class` : classes
     * `.inc` : include files.
@@ -109,12 +109,12 @@ cit checkout kirkstone      # the layer kirkstone branch
 
 ### Variable types
 
-* Any variables created under these files are **local variables**:
+* Any variables created under these files are **local variables**: Only seen in its file
   * `.bb`
   * `.bbappend`
   * `.class`
   
-* Any variabless created under these files are **global variables**:
+* Any variabless created under these files are **global variables**: can be seen in any other metadat file
   * `.conf`
 
 ### Syntax
@@ -137,14 +137,14 @@ myVar ?= "4"
 # bitbake result 3
 
 myvar ?= "3"              # assign to 3
-myvar ?= "4"              # assignation is weak --> already assigned (in any metadata file) so, no new assignation
+myvar ?= "4"              # assignation is weak --> already assigned (in any metadata file if this var is global) so, no new assignation
 # bitbake result 3
 ```
 
 * Weak Weak Assignation (??=)
 
 ```conf
-myVar ??= "4"             # will not get assigned (treat it as a default value)
+myVar ??= "4"             # will not get assigned (treats it as a default value)
 myVar ?= "3"
 # bitbake result 3
 
@@ -158,7 +158,38 @@ myVar = "7"
 # bitbake result 7
 ```
 
+* Immediate Assignation (:=)
+
+```conf
+xar = "3"
+myVar = "${xar}"          # myVar = ${xar} : it will be evaluated at the end
+xar = "4"
+# myVar = "4"
+
+xar = "3"
+myVar := "${xar}"         # myVar = ${xar} : it will be evaluated immediately
+xar = "4"
+# myVar = "3"
+
+myVar := "${xar}"         # myVar = ${xar} : it will be evaluated at the end as no previous value for xar
+xar = "3"
+xar = "4"
+# myVar = "4"
+
+xar ??= "3"
+myVar := "${xar}"         # myVar = ${xar} : it will be evaluated immediately
+xar ??= "4"
+# myVar = "3"
+
+xar ??= "3"
+myVar := "${xar}"         # myVar = ${xar} : it will be evaluated immediately
+xar = "4"
+# myVar = "3"
+```
+
 #### To Append
+
+* Using `+=` and `:append`
 
 ```conf
 myVar = "4"
@@ -166,7 +197,7 @@ myVar += "5"
 # bitbake result "4 5"    # it will put a space in between
 
 myVar = "4"
-myVar:append = "5"
+myVar:append = "5"        # not supperted in 'dunfill' 
 # bitbake result "45"     # no space
 
 myVar = "4"
@@ -203,7 +234,46 @@ myVar ?= "7"
 # bitbake result "5 6"
 ```
 
-* Use `:append` as it's more readable.
+* Use `:append` as it's more readable (But do not forget to put the **space** at the beginning).
+
+* Pre-Append
+
+```conf
+myVar =+ "7"
+myVar:prepend = "8"
+```
+
+* Append & Pre-Append with dots (.)
+
+```conf
+# append
+myVar .= "4"
+
+# pre-append
+myVar =. "3"
+```
+
+* Append Priority
+  1. `+=` and `.=`
+  2. `:append`
+
+* Example
+
+```conf
+xar = "5"
+xar:append = "7"
+xar =. "8"
+xar =+ "9"
+# bitbake result "79 85"
+```
+
+#### To Remove
+
+```conf
+myVar = "3 5 6"
+myVar:remove = "5"
+# bitbake result "3 6"
+```
 
 ### How to read global Variables
 
@@ -212,3 +282,57 @@ myVar ?= "7"
 ```shell
 bitbake-getvar myVar      # give it your variable to get.
 ```
+
+---
+
+## Creating a Layer
+
+* Local Variables are applied on recipes
+
+1. Create a layer directory **outside Poky**.
+
+   * create layer.
+   * **layer.conf** file will be created and have variables
+      * 
+
+   * bitbake parses the conf files first
+
+2. Add your layer
+
+   * Vim on **BBlayers.conf** : include all layers that you want in your building system (Use absolute pathes).
+   * Or, use the command : **`bitbake-layers add-layer [layer relative path]`**
+
+   * If this layer depends on anoter layer, bitbake will yield an error.
+
+   * When you add a layer, make sure that you are in the `Poky/building environemnt` path.
+
+3. Run `bitbake` on your recipe.
+
+   * `bitbake myrecipe`
+
+### Build Environemnt
+
+* One of the important scripts (to build your environment) is `oe-init-build-env` which creates your environment.
+    1. It updates the `PATH` environment variable to run `bitbake` as a normal command.
+    2. Creates the template of the build environment.
+
+* You must resource it before using `bitbake`
+
+---
+
+## Task
+
+1. Create an environment.
+2. Create layer.
+   1. Create a recipe in this layer (take a copy of the provided recipe)
+   2. Edit in the function `do_display_banner()`
+
+    > ```cpp
+    > if(var == 3)
+    >   display "hi"
+    > else if (var == 4)
+    >   display "hello"
+    >```
+
+3. Either use `bb.` or `if in python`
+4. In `layer.conf` create a variable to read the variable.
