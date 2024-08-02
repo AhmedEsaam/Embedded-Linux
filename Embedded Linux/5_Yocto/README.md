@@ -36,8 +36,8 @@ git clone meta-rasb     # the layer which has RPI board support package
 
 * The came up with the **Reference** to How to create an image using the **Open Embedded** with the `bitbake` tool.
 
-* They created a repo called `Poky` that contains:
-  * **bitbake**
+* They created a repo called **`Poky`** that contains:
+  * **`bitbake`**
   * **Layers from Open Embedded**:
     * `meta`
     * `meta-core`
@@ -53,7 +53,7 @@ git clone meta-rasb     # the layer which has RPI board support package
   * **Dunfill**
   * **Kirkstone**
 
-* When you clone a layer that has been developed using a specific **Poky** version, you need to checkout to this release branch in the cloned layer or Yocto will show an error.
+* When you clone a layer that has been developed using a specific **Poky** version (based on a specific `bitbake` version), you need to checkout to this release branch in the cloned layer or Yocto will show an error.
 
 * It's often required to make a certain layer compatible for a specific Poky version.
 
@@ -74,8 +74,8 @@ cit checkout kirkstone      # the layer kirkstone branch
 
   * If the layer is a `meta-application` layer
     * `.bb` : aaplication files.
-    * `.class` : classes
     * `.bbappend` : append to bb files
+    * `.class` : classes
     * `.inc` : include files.
 
 ### How Bitbake works?
@@ -91,7 +91,7 @@ cit checkout kirkstone      # the layer kirkstone branch
   * `recipes-myApp` dir. for every application which have
     * `.bb` file which have the recipe for how to build myApp.
 
-* So the bitbake...
+* So the `bitbake`...
   * First it clones into the **Downloads** directry.
   * For example it follows the `.bb` file which contains the **recipe** to install your **application**:
     * `unpack` in **S**
@@ -102,3 +102,113 @@ cit checkout kirkstone      # the layer kirkstone branch
     * `packagefeeder` in **D**
       * It either make the Image a **release Image** (without debugging symbols)
       * Or an **SDK Image** (Software Developer Kit - with debugging symbols).
+
+---
+
+## Variables
+
+### Variable types
+
+* Any variables created under these files are **local variables**:
+  * `.bb`
+  * `.bbappend`
+  * `.class`
+  
+* Any variabless created under these files are **global variables**:
+  * `.conf`
+
+### Syntax
+
+#### To Assign a variable
+
+* Normal Assignation (=)
+
+```conf
+myVar = "string"
+myVar = "name"
+# bitbake result "name"
+```
+
+* Weak Assignation (?=)
+
+```conf
+myVar = "3"
+myVar ?= "4"
+# bitbake result 3
+
+myvar ?= "3"              # assign to 3
+myvar ?= "4"              # assignation is weak --> already assigned (in any metadata file) so, no new assignation
+# bitbake result 3
+```
+
+* Weak Weak Assignation (??=)
+
+```conf
+myVar ??= "4"             # will not get assigned (treat it as a default value)
+myVar ?= "3"
+# bitbake result 3
+
+myVar ??= "4"
+myVar ??= "3"
+# bitbake result 3
+
+myVar ??= "5"
+myVar ?= "6"
+myVar = "7"
+# bitbake result 7
+```
+
+#### To Append
+
+```conf
+myVar = "4"
+myVar += "5"
+# bitbake result "4 5"    # it will put a space in between
+
+myVar = "4"
+myVar:append = "5"
+# bitbake result "45"     # no space
+
+myVar = "4"
+myVar += "5"
+myVar:append = "6"
+# bitbake result "4 56"
+
+myVar = "4"
+myVar:append = "5"        # any alphapetical operation is a low priority (will execute last) 
+myVar += "6"
+# bitbake result "46 5"
+
+myVar = "4"
+myVar:append = "5"
+myVar += "6"
+# bitbake result "4 6 5"
+
+myVar ??= "5"             # this will not get assigned (it's a default value)
+myVar += "6"
+# bitbake result "6"
+
+myVar ?= "5"
+myVar += "6"
+# bitbake result "5 6"
+
+myVar ?= "5"
+myVar += "6"
+myVar = "7"
+# bitbake result "7"
+
+myVar ?= "5"
+myVar += "6"
+myVar ?= "7"
+# bitbake result "5 6"
+```
+
+* Use `:append` as it's more readable.
+
+### How to read global Variables
+
+* `bitbake` tool:
+
+```shell
+bitbake-getvar myVar      # give it your variable to get.
+```
