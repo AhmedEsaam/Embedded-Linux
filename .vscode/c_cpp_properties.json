@@ -3,7 +3,9 @@
         {
             "name": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/usr/src/linux-headers-6.2.0-39/include/**",
+                "/usr/src/linux-headers-6.2.0-39-generic/include/**"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "${default}",

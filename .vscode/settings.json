@@ -113,6 +113,13 @@
     "chrono": "cpp",
     "condition_variable": "cpp",
     "mutex": "cpp",
-    "shared_mutex": "cpp"
+    "shared_mutex": "cpp",
+    "fs.h": "c",
+    "cdev.h": "c",
+    "kobject.h": "c",
+    "module.h": "c",
+    "init.h": "c",
+    "proc_fs.h": "c",
+    "compiler.h": "c"
   }
 }

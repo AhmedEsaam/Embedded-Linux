@@ -336,3 +336,4 @@ bitbake-getvar myVar      # give it your variable to get.
 
 3. Either use `bb.` or `if in python`
 4. In `layer.conf` create a variable to read the variable.
+5. Include this variable : `LICENCE = "closed"` to build recipe
