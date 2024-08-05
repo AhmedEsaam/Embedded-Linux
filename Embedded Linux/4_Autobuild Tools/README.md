@@ -42,7 +42,7 @@ make menuconfig
   * games > chocolates
 * **Filesystem Image**: type and size of rootfs
 * **Bootloader**: grub
-* 
+
 ---
 
 ## Task
