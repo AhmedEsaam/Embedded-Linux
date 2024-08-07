@@ -123,7 +123,7 @@ cit checkout kirkstone      # the layer kirkstone branch
 
 * Normal Assignation (=)
 
-```conf
+```sh
 myVar = "string"
 myVar = "name"
 # bitbake result "name"
@@ -131,7 +131,7 @@ myVar = "name"
 
 * Weak Assignation (?=)
 
-```conf
+```sh
 myVar = "3"
 myVar ?= "4"
 # bitbake result 3
@@ -143,7 +143,7 @@ myvar ?= "4"              # assignation is weak --> already assigned (in any met
 
 * Weak Weak Assignation (??=)
 
-```conf
+```sh
 myVar ??= "4"             # will not get assigned (treats it as a default value)
 myVar ?= "3"
 # bitbake result 3
@@ -160,7 +160,7 @@ myVar = "7"
 
 * Immediate Assignation (:=)
 
-```conf
+```sh
 xar = "3"
 myVar = "${xar}"          # myVar = ${xar} : it will be evaluated at the end
 xar = "4"
@@ -191,7 +191,7 @@ xar = "4"
 
 * Using `+=` and `:append`
 
-```conf
+```sh
 myVar = "4"
 myVar += "5"
 # bitbake result "4 5"    # it will put a space in between
@@ -238,14 +238,14 @@ myVar ?= "7"
 
 * Pre-Append
 
-```conf
+```sh
 myVar =+ "7"
 myVar:prepend = "8"
 ```
 
 * Append & Pre-Append with dots (.)
 
-```conf
+```sh
 # append
 myVar .= "4"
 
@@ -259,7 +259,7 @@ myVar =. "3"
 
 * Example
 
-```conf
+```sh
 xar = "5"
 xar:append = "7"
 xar =. "8"
@@ -269,7 +269,7 @@ xar =+ "9"
 
 #### To Remove
 
-```conf
+```sh
 myVar = "3 5 6"
 myVar:remove = "5"
 # bitbake result "3 6"
