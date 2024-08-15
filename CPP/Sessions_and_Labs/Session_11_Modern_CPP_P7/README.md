@@ -1,4 +1,4 @@
-# C++ - Session 11 Notes - Modern C++ - Smart Pointers
+# C++ - Session 11 Notes - Modern C++ - P7
 
 * Raw Pointers Disadvantages:
     1. Dangling Pointers
@@ -79,3 +79,45 @@ sPtr.use_count();
 std::shared_ptr<int> sPtr(new int(100));
 std::weak_ptr<int> wPtr = sPtr;     // Note: cannot = a unique pointer
 ```
+
+---
+
+## Rules in C++
+
+* Are **Guidelines** to:
+  * Manage resources (specially if you use dynamically allocated memory [raw pointers])
+    * To solve the problem of shallow copy.
+  * And object lifecycles
+
+* if you define/delete one method -->
+  * You must delete all the remaining.
+
+* Rule Types
+  1. **Rule of Zero** : (Do not define anyhting)
+  2. **Rule of Three** : Define all or nothing of:
+     1. `Destructor`
+     2. `Copy Constructor` or `Assignment operator overloading`
+  3. **Rule of Five** : Define all or nothing of:
+     1. `Destructor`
+     2. `Copy Constructor` or `Assignment operator overloading`
+     3. `Move Constructor` or `Move with assignment operator`
+
+---
+
+## Move Constructor
+
+* Moves the ownership of the object
+
+```cpp
+// Move constructor
+A& Operator= (const A&&);
+```
+
+---
+
+## Generated Functions
+
+* The compiler generates some funtions by default for every class (it differs from one standard to another)
+  1. **Default constructor** (if you have not provided any constructor of any type)
+  2. **Default Destructor**
+  3. **Copy constructor**

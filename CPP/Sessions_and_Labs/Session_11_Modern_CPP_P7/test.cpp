@@ -27,8 +27,10 @@ int main()
 
     sPtr1.use_count();
 
-
     /* ------------------------------------------------------- */
-    /* Shared Pointer */
+    /* Weak Pointer */
+    std::shared_ptr<int> sPtr(new int(100));
+    std::weak_ptr<int> wPtr = sPtr; // Note: cannot = a unique pointer
+
     return 0;
 }
