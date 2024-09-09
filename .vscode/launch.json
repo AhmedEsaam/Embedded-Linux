@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "d:/Embedded/ITI Automotive Android Development/Embedded Linux",
-      "program": "d:/Embedded/ITI Automotive Android Development/Embedded Linux/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/ahmed-essam/iti/Embedded-Linux/CPP/Sessions_and_Labs/Session_11_Modern_CPP_P7",
+      "program": "/home/ahmed-essam/iti/Embedded-Linux/CPP/Sessions_and_Labs/Session_11_Modern_CPP_P7/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
